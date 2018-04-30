@@ -117,7 +117,7 @@ BOOL CCreatImageWidthTableDlg::OnInitDialog()
 
 	// TODO: 在此加入額外的初始設定
 	SetDlgItemInt(IDC_EDIT_START, 0x21);
-	SetDlgItemInt(IDC_EDIT_END, 0x7E);
+	SetDlgItemInt(IDC_EDIT_END, 0x8E);
 	DWORD currentPahtlength = 0;
 	DWORD dwError = 0;
 	currentPahtlength = GetCurrentDirectory(0, NULL);
@@ -203,13 +203,13 @@ void CCreatImageWidthTableDlg::OnBnClickedSelectFolder()
 	CString m_strFolderPath;
 	CString m_strDisplayName;
 #ifdef _DEBUG
-	m_Folder = _T("E:\\LCD\\[20180426]EngTest3\\FONT");
+	m_Folder = _T("E:\\LCD\\[20180430]Eng);
 #else
 	GetDlgItemText(IDC_EDIT_FOLDER, m_Folder);
 	if (m_Folder == _T(""))
 		m_Folder = m_strCurFolder;
 #endif
-	CFolderDialog dlg(_T("Select Folder"), m_strFolderPath, this);//E:\LCD\[20180426]EngTest3\FONT
+	CFolderDialog dlg(_T("Select Folder"), m_strFolderPath, this);
 	dlg.SetSelectedFolder(m_Folder);
 	if (dlg.DoModal() == IDOK)
 	{
@@ -336,7 +336,7 @@ void CCreatImageWidthTableDlg::OnBnClickedButRun()
 	LPTSTR tASCII;
 	CFile file;
 	CxImage *pCxImage = NULL;
-	char nASCII = 0;
+	unsigned char nASCII = 0;
 	int imageW = 0;
 	//int nPahtlength = 0;
 	//strFolder = m_Folder;
@@ -368,8 +368,8 @@ void CCreatImageWidthTableDlg::OnBnClickedButRun()
 	csCTable = _T("{\r\n\t");
 	char arr[256];
 	memset(arr, 0, 256);
-	int maxchar = 0;
-	int minchar = 255;
+	unsigned int maxchar = 0;
+	unsigned int minchar = 255;
 	CStringArray strArrChar;
 	CString pa;
 
@@ -394,7 +394,7 @@ void CCreatImageWidthTableDlg::OnBnClickedButRun()
 				csFname_L.Delete(0, csFname_L.GetLength() - 2);
 				tASCII = csFname_L.GetBuffer(0);
 				csFname_L.ReleaseBuffer();
-				nASCII = (char)h2d(tASCII);
+				nASCII = (unsigned char)h2d(tASCII);
 				
 				//csFname_L = csFname_R.GetBuffer(csFname_R.GetLength() - 2);
 				csTable += csFname_R;
